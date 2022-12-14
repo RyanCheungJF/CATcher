@@ -118,7 +118,7 @@ const REQUIRED_LABELS = {
   }
 };
 
-export type LabelCategory = keyof typeof REQUIRED_LABELS;
+export type LabelCategory = keyof typeof REQUIRED_LABELS | 'responseTag';
 
 @Injectable({
   providedIn: 'root'
@@ -196,7 +196,7 @@ export class LabelService {
    * @param attributeName: the type of the label
    * @return an array of label of that type
    */
-  getLabelList(attributeName: string): Label[] {
+  getLabelList(attributeName: LabelCategory): Label[] {
     switch (attributeName) {
       case 'severity':
         return LabelService.severityLabels;
@@ -212,7 +212,7 @@ export class LabelService {
    * Returns a title for the label type
    * @param attributeName: the type of the label
    */
-  getLabelTitle(attributeName: string): string {
+  getLabelTitle(attributeName: LabelCategory): string {
     switch (attributeName) {
       case 'severity':
         return DISPLAY_NAME_SEVERITY;
